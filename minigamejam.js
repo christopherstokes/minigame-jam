@@ -6,6 +6,54 @@
 var t=0
 var x=96
 var y=24
+var dx=0
+var dy=0
+
+// base animation code
+function Animation(_frames, _timing, _width, _height, _ck) {
+	return {
+		"frames": _frames,
+		"timing": _timing,
+		"timeLast": time(),
+		"width": _width || 8,
+		"height": _height || 8,
+		"currentFrame": 0,
+		"ck": _ck || 0
+	}
+}
+
+Animation.prototype.update = function() {
+	if (time() - this.timeLast() > this.timing) {
+		if (this.currentFrame < this.frames.length) {
+			this.currentFrame+=1
+		} else {
+			this.currentFrame=1
+		}
+	}
+}
+
+Animation.prototype.draw = function(_x, _y, _flp, _rot) {
+	var _currentFrame = this.frames[this.currentFrame]
+	spr(_currentFrame, _x, _y, this.ck, 1, _flp, _rot, this.width/8, this.height/8)
+}
+
+// base actor code
+function Actor() {
+
+}
+
+Actor.prototype.update = function() {
+
+}
+
+Actor.prototype.draw = function() {
+
+}
+
+// base state code
+function State() {
+
+}
 
 function TIC()
 {
